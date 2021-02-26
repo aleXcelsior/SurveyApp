@@ -25,7 +25,7 @@ const SurveyList = (props) => {
           <div className="card-action center">
             <p style={{ marginTop: "-10px" }}>Votes:</p>
             <a>Yes {survey.yes}</a>
-            <a>Yes {survey.no}</a>
+            <a>No {survey.no}</a>
           </div>
         </div>
       );
