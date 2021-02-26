@@ -4,10 +4,16 @@ const cookieSession = require("cookie-session");
 const passport = require("passport");
 const bodyParser = require("body-parser");
 const keys = require("./config/keys");
-require("./models/Users"); // This has to be above any services or you'll get an error since the services needs the models to exist.
+
+require("./models/User"); // This has to be above any services or you'll get an error since the services needs the models to exist.
+require("./models/Survey");
+
 require("./services/passport");
 
-mongoose.connect(keys.mongoURI);
+mongoose.connect(keys.mongoURI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
 const app = express();
 
@@ -25,6 +31,7 @@ app.use(passport.session());
 
 require("./routes/authRoutes")(app);
 require("./routes/billingRoutes")(app);
+require("./routes/surveyRoutes")(app);
 
 if (process.env.NODE_ENV === "production") {
   //Express will serve assets like JS and CSS from the client/build
