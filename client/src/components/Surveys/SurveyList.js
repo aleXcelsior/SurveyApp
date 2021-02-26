@@ -1,20 +1,33 @@
 import { connect } from "react-redux";
 import React, { useEffect } from "react";
 
-import { fetchSurveys } from "../../actions";
+import { fetchSurveys, deleteSurvey } from "../../actions";
 
 const SurveyList = (props) => {
-  const { fetchSurveys, surveys } = props;
+  const { fetchSurveys, deleteSurvey, surveys } = props;
 
   useEffect(() => {
     fetchSurveys();
   }, []);
 
+  function removeSurvey(surveyId) {
+    deleteSurvey(surveyId);
+  }
+
   function renderSurveys() {
-    console.log(surveys);
     return surveys.reverse().map((survey) => {
       return (
         <div className="card grey lighten-3" key={survey._id}>
+          <div
+            className="right"
+            onClick={() => {
+              removeSurvey(survey._id);
+            }}
+          >
+            <i className="material-icons" style={{ cursor: "pointer" }}>
+              delete_forever
+            </i>{" "}
+          </div>
           <div className="card-content">
             <span className="card-title">{survey.title}</span>
             <p>{survey.body}</p>
@@ -39,4 +52,6 @@ function mapStateToProps({ surveys }) {
   return { surveys };
 }
 
-export default connect(mapStateToProps, { fetchSurveys })(SurveyList);
+export default connect(mapStateToProps, { fetchSurveys, deleteSurvey })(
+  SurveyList
+);

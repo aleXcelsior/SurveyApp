@@ -19,7 +19,19 @@ export const submitSurvey = (values, history) => async (dispatch) => {
 };
 
 export const fetchSurveys = () => async (dispatch) => {
+  console.log("Am I getting called?");
+
   const res = await axios.get("/api/surveys");
 
   dispatch({ type: "FETCH_SURVEYS", payload: res.data });
+};
+
+export const deleteSurvey = (surveyToDelete) => async (dispatch) => {
+  const res = await axios({
+    method: "post",
+    url: "/api/surveydelete",
+    data: { id: surveyToDelete },
+  });
+
+  dispatch(fetchSurveys());
 };

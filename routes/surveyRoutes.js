@@ -94,4 +94,15 @@ module.exports = (app) => {
       res.status(422).send(error);
     }
   });
+
+  app.post("/api/surveydelete", requireLogin, async (req, res) => {
+    console.log(req.body.id);
+    const temp = await Survey.deleteOne({
+      _id: req.body.id,
+      _user: req.user.id,
+    });
+
+    console.log(temp);
+    res.send("");
+  });
 };
