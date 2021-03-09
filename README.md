@@ -6,4 +6,4 @@ Surveys are sent out using sendgrid and data is collected by using sendgrid webh
 
 Google oauth for signing in/up.
 
-Payment using stripe (This is in test mode, no actual payments will be processes. Use credit card number 4242 4242 4242 to add credits to your account).
+Payment using stripe (This is in test mode, no actual payments will be processed. Use credit card number 4242 4242 4242 to add credits to your account).
